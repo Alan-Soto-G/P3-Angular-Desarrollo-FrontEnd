@@ -109,23 +109,24 @@ export class AddressComponent implements OnInit, AfterViewInit {
 
   save(): void {
     const addr: Address = this.form.value;
-
+    //Para poder crear una dirección, es necesario cambiar el link http://localhost:4200/#/address/create/#númeroiddeunusuriosindirección
+    // MODO CREACIÓN
     if (this.isNew) {
       if (this.userId !== null) {
-        this.getByUser(this.userId).pipe(
-          switchMap(existing => {
-            if (existing && existing.id) {
-              addr.id = existing.id;
-              return this.update(addr);
-            } else {
-              return this.create(addr);
-            }
-          }),
-          catchError(() => this.create(addr))
-        ).subscribe(() => this.router.navigate(['/address']));
+        addr.userId = this.userId; // importante asignar esto
+
+        this.create(addr).subscribe({
+          next: () => this.router.navigate(['/address']),
+          error: err => {
+            console.error('Error al crear dirección:', err);
+            alert('No se pudo crear la dirección.');
+          }
+        });
       } else {
-        this.create(addr).subscribe(() => this.router.navigate(['/address']));
+        alert('Falta el userId para crear la dirección.');
       }
+
+    // MODO EDICIÓN
     } else {
       if (addr.id != null) {
         this.update(addr).subscribe(() => this.router.navigate(['/address']));
@@ -134,6 +135,7 @@ export class AddressComponent implements OnInit, AfterViewInit {
       }
     }
   }
+
 
   deleteAddress(id: number): void {
     if (confirm('¿Estás seguro de eliminar esta dirección?')) {
