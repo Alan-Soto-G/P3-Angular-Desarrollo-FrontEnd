@@ -30,6 +30,11 @@
     <!-- FORMULARIO -->
     <div *ngIf="!isNew || userId !== null">
       <div class="row">
+        <!-- MAPA -->
+        <div class="col-md-6">
+          <div id="map" class="leaflet-container" style="height:400px;"></div>
+        </div>
+        
         <div class="col-md-6">
           <form [formGroup]="form" (ngSubmit)="save()">
             <div class="form-group mb-3">
@@ -48,11 +53,6 @@
               {{ isNew ? 'Crear' : 'Actualizar' }}
             </button>
           </form>
-        </div>
-
-        <!-- MAPA -->
-        <div class="col-md-6">
-          <div id="map" class="leaflet-container" style="height:400px;"></div>
         </div>
       </div>
     </div>
