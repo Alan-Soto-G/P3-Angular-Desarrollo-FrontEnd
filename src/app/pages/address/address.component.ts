@@ -21,8 +21,7 @@ export class AddressComponent implements OnInit, AfterViewInit {
   form: FormGroup;
   isNew = false;
   private userId: number;
-  private baseUrl = 'http://127.0.0.1:5000/address';
-
+  private baseUrl = 'http://localhost:5000/address'; // URL del servicio mock
   private map: L.Map;
   private marker: L.Marker;
 
@@ -79,7 +78,7 @@ export class AddressComponent implements OnInit, AfterViewInit {
   }
 
   listAll(): Observable<Address[]> {
-    return this.http.get<Address[]>(`${this.baseUrl}/`);
+    return this.http.get<Address[]>(`${this.baseUrl}`);
   }
 
   getById(id: number): Observable<Address> {
@@ -98,9 +97,39 @@ export class AddressComponent implements OnInit, AfterViewInit {
     return this.http.put<Address>(`${this.baseUrl}/${addr.id}`, addr);
   }
 
+  delete(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+
   save(): void {
     const addr: Address = this.form.value;
-    const action = this.isNew ? this.create(addr) : this.update(addr);
-    action.subscribe(() => this.router.navigate(['/address']));
+
+    if (this.isNew) {
+      // Verificar si el usuario ya tiene dirección
+      this.getByUser(this.userId).subscribe(existingAddr => {
+        if (existingAddr && existingAddr.id) {
+          // Usuario ya tiene dirección -> actualizamos
+          addr.id = existingAddr.id;
+          this.update(addr).subscribe(() => this.router.navigate(['/address']));
+        } else {
+          // Usuario no tiene dirección -> creamos
+          this.create(addr).subscribe(() => this.router.navigate(['/address']));
+        }
+      }, error => {
+        // Si error al buscar dirección, intentamos crear de todas formas
+        this.create(addr).subscribe(() => this.router.navigate(['/address']));
+      });
+    } else {
+      // Edición normal de dirección existente
+      this.update(addr).subscribe(() => this.router.navigate(['/address']));
+    }
+  }
+
+
+  deleteAddress(): void {
+    const id = this.form.value.id;
+    if (id && confirm('¿Estás seguro de eliminar esta dirección?')) {
+      this.delete(id).subscribe(() => this.router.navigate(['/address']));
+    }
   }
 }
