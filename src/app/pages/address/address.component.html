@@ -1,32 +1,59 @@
-<!-- address.component.html -->
-<div class="container-fluid mt-4">
+<div class="container mt-4">
   <div class="card shadow border-0 p-4">
-    <h2 class="text-primary mb-4">FBC - Address</h2>
-    <div class="row">
-      <!-- MAPA -->
-      <div class="map-panel">
-        <div id="map" class="leaflet-container" style="height:400px;"></div>
-      </div>
+    <h2 class="text-primary mb-4">Direcciones</h2>
 
-      <!-- FORMULARIO -->
-      <div class="col-lg-6">
-        <form [formGroup]="form" (ngSubmit)="save()">
-          <div class="form-group mb-3">
-            <label for="street">Street</label>
-            <input id="street" class="form-control" formControlName="street" />
-          </div>
-          <div class="form-group mb-3">
-            <label for="number">Number</label>
-            <input id="number" class="form-control" formControlName="number" />
-          </div>
-          <button
-            class="btn btn-primary w-100"
-            type="submit"
-            [disabled]="form.invalid"
-          >
-            {{ isNew ? 'Create' : 'Update' }}
-          </button>
-        </form>
+    <!-- LISTADO -->
+    <div *ngIf="isNew && addresses.length > 0">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Calle</th>
+            <th>Número</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let addr of addresses">
+            <td>{{ addr.id }}</td>
+            <td>{{ addr.street }}</td>
+            <td>{{ addr.number }}</td>
+            <td>
+              <button class="btn btn-sm btn-info" (click)="editAddress(addr.id!)">Editar</button>
+              <button class="btn btn-sm btn-danger" (click)="deleteAddress(addr.id!)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- FORMULARIO -->
+    <div *ngIf="!isNew || userId !== null">
+      <div class="row">
+        <div class="col-md-6">
+          <form [formGroup]="form" (ngSubmit)="save()">
+            <div class="form-group mb-3">
+              <label for="street">Street</label>
+              <input id="street" class="form-control" formControlName="street" />
+            </div>
+            <div class="form-group mb-3">
+              <label for="number">Number</label>
+              <input id="number" class="form-control" formControlName="number" />
+            </div>
+            <button
+              class="btn btn-primary w-100"
+              type="submit"
+              [disabled]="form.invalid"
+            >
+              {{ isNew ? 'Crear' : 'Actualizar' }}
+            </button>
+          </form>
+        </div>
+
+        <!-- MAPA -->
+        <div class="col-md-6">
+          <div id="map" class="leaflet-container" style="height:400px;"></div>
+        </div>
       </div>
     </div>
   </div>

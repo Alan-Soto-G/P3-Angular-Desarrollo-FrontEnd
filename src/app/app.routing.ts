@@ -23,7 +23,7 @@ export const routes: Routes = [
       },
       // 👇 Aquí se define la ruta directamente a AddressComponent
       { path: 'address', component: AddressComponent },
-      { path: 'address/new/:userId', component: AddressComponent },
+      { path: 'address/create/:userId', component: AddressComponent },
       { path: 'address/edit/:id', component: AddressComponent }
     ]
   },
