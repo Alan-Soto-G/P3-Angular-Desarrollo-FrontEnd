@@ -1,14 +1,15 @@
 <div class="container-fluid mt-4">
   <div class="card shadow border-0 p-4">
     <h2 class="text-primary mb-4">FBC - Address</h2>
-    <div class="row">
-      <!-- MAPA -->
-      <div class="col-lg-6 mb-4">
-        <div id="map" class="leaflet-container" style="height:400px;"></div>
+
+    <div class="address-body">
+      <!-- Mapa a la izquierda -->
+      <div class="map-panel">
+        <div id="map"></div>
       </div>
 
-      <!-- FORMULARIO -->
-      <div class="col-lg-6">
+      <!-- Formulario a la derecha -->
+      <div class="form-panel">
         <form [formGroup]="form" (ngSubmit)="save()">
           <div class="form-group mb-3">
             <label for="street">Street</label>
