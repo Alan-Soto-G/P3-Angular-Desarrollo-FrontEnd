@@ -25,4 +25,5 @@ import { TableCrudComponent } from './table-crud/table-crud.component';
     TableCrudComponent
   ]
 })
+
 export class ComponentsModule { }
