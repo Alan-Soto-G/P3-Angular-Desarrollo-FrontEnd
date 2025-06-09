@@ -9,6 +9,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { AddressComponent } from './pages/address/address.component';
 import { PasswordComponent } from './pages/password/password.component';
+import { UsersComponent } from './pages/users/users.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -31,7 +32,10 @@ export const routes: Routes = [
       // Rutas de Password protegidas
       { path: 'password', component: PasswordComponent, canActivate: [AuthenticatedGuard] },
       { path: 'password/create/:userId', component: PasswordComponent, canActivate: [AuthenticatedGuard] },
-      { path: 'password/edit/:id', component: PasswordComponent, canActivate: [AuthenticatedGuard] }
+      { path: 'password/edit/:id', component: PasswordComponent, canActivate: [AuthenticatedGuard] },
+
+      // Rutas de Users protegidas
+      { path: 'users', component: UsersComponent, canActivate: [AuthenticatedGuard] },
     ]
   },
   {

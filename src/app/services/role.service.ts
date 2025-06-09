@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 export interface Role {
-    _id?: string;
+    _id: string;
     name: string;
     description: string;
     permissions?: string[];
