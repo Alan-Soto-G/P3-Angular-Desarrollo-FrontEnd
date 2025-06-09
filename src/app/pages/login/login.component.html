@@ -20,16 +20,52 @@
   <div class="row justify-content-center">
     <div class="col-lg-5 col-md-7">
       <div class="card bg-secondary shadow border-0">
-        <div class="card-header bg-transparent pb-5">
-          <div class="text-muted text-center mt-2 mb-3"><small>Sign in with</small></div>          <div class="btn-wrapper text-center">
+        <div class="card-header bg-transparent pb-5">          <div class="text-muted text-center mt-2 mb-3"><small>Sign in with</small></div>
+          <div class="btn-wrapper text-center">
+            <!-- Botón oficial de Google (solo si está configurado) -->
+            <div id="google-signin-button" 
+                 *ngIf="isGoogleConfigured" 
+                 class="mb-3" 
+                 style="display: flex; justify-content: center;">
+            </div>
+            
+            <!-- Debug info (solo en desarrollo) -->
+            <div *ngIf="isGoogleConfigured" class="mb-2">
+              <small class="text-muted">
+                Estado: 
+                <span class="badge badge-success" *ngIf="debugInfo.googleLoaded">Google Cargado</span>
+                <span class="badge badge-danger" *ngIf="!debugInfo.googleLoaded">Google No Cargado</span>
+                |
+                <span class="badge badge-success" *ngIf="debugInfo.buttonRendered">Botón OK</span>
+                <span class="badge badge-warning" *ngIf="!debugInfo.buttonRendered">Sin Botón</span>
+              </small>
+            </div>
+            
+            <!-- Botones personalizados -->
+            <button type="button" 
+                    class="btn btn-neutral btn-icon mr-2" 
+                    (click)="signInWithGoogle()"
+                    [title]="isGoogleConfigured ? 'Login con Google' : 'Login con Google (Demo)'">
+              <span class="btn-inner--icon">
+                <img src="../assets/img/icons/common/google.svg">
+              </span>
+              <span class="btn-inner--text">
+                Google {{ !isGoogleConfigured ? '(Demo)' : '' }}
+              </span>
+            </button>
             <button type="button" class="btn btn-neutral btn-icon" (click)="signInWithGitHub()">
               <span class="btn-inner--icon"><img src="../assets/img/icons/common/github.svg"></span>
-              <span class="btn-inner--text">Github</span>
+              <span class="btn-inner--text">Github (Demo)</span>
             </button>
-            <button type="button" class="btn btn-neutral btn-icon" (click)="signInWithGoogle()">
-              <span class="btn-inner--icon"><img src="../assets/img/icons/common/google.svg"></span>
-              <span class="btn-inner--text">Google</span>
-            </button>
+            
+            <!-- Botón de debug -->
+            <div class="mt-2" *ngIf="isGoogleConfigured">
+              <button type="button" 
+                      class="btn btn-sm btn-outline-info" 
+                      (click)="showDebugInfo()">
+                <i class="fas fa-bug"></i> Debug Google
+              </button>
+            </div>
           </div>
         </div>
         <div class="card-body px-lg-5 py-lg-5">

@@ -7,28 +7,57 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { UsersComponent } from '../../pages/users/users.component';
 import { RolesComponent } from '../../pages/roles/roles.component';
-import {PasswordComponent} from '../../pages/password/password.component';
+import { PasswordComponent } from '../../pages/password/password.component';
+import { DevicesComponent } from '../../pages/devices/devices.component';
+import { AddressComponent } from '../../pages/address/address.component';
 import { AuthenticatedGuard } from 'src/app/guardians/authenticated.guard';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
-    { path: 'user-profile', component: UserProfileComponent },
-    { path: 'tables', component: TablesComponent },
-    { path: 'icons', component: IconsComponent },
-    { path: 'maps', component: MapsComponent },    { 
+    { 
+        path: 'user-profile', 
+        component: UserProfileComponent,
+        canActivate: [AuthenticatedGuard]
+    },
+    { 
         path: 'users', 
         component: UsersComponent,
-        //canActivate: [AuthenticatedGuard]
+        canActivate: [AuthenticatedGuard]
     },
     { 
         path: 'roles', 
         component: RolesComponent,
-        //canActivate: [AuthenticatedGuard]
+        canActivate: [AuthenticatedGuard]
     },
     {
-        path: 'passwords',
+        path: 'devices',
+        component: DevicesComponent,
+        canActivate: [AuthenticatedGuard]
+    },
+    {
+        path: 'address',
+        component: AddressComponent,
+        canActivate: [AuthenticatedGuard]
+    },
+    {
+        path: 'password',
         component: PasswordComponent,
-        //canActivate: [AuthenticatedGuard]
+        canActivate: [AuthenticatedGuard]
+    },
+    { 
+        path: 'tables', 
+        component: TablesComponent,
+        canActivate: [AuthenticatedGuard]
+    },
+    { 
+        path: 'icons', 
+        component: IconsComponent,
+        canActivate: [AuthenticatedGuard]
+    },
+    { 
+        path: 'maps', 
+        component: MapsComponent,
+        canActivate: [AuthenticatedGuard]
     },
     {
         path: 'theaters',

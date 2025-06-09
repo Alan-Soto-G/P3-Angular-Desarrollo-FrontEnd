@@ -4,6 +4,7 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { SecurityService } from 'src/app/services/security.service';
+import { ProfilePictureService } from 'src/app/services/profile-picture.service';
 import { Subscription } from 'rxjs';
 import { WebSocketService } from 'src/app/services/web-socket-service.service';
 
@@ -17,19 +18,22 @@ export class NavbarComponent implements OnInit {
   public listTitles: any[];
   public location: Location;
   user: User;
-  subscription: Subscription;
-  constructor(location: Location,
+  subscription: Subscription;  constructor(location: Location,
     private element: ElementRef,
     private router: Router,
     private securityService: SecurityService, 
-    private webSocketService: WebSocketService){
+    private webSocketService: WebSocketService,
+    private profilePictureService: ProfilePictureService){
     this.location = location;
     this.subscription = this.securityService.getUser().subscribe(data => {
       this.user = data;
     })
-  }
-  logout(){
+  }  logout(){
     this.securityService.logout()
+  }
+
+  getProfilePictureUrl(): string {
+    return this.profilePictureService.getBestProfilePicture(this.user, 40);
   }
 
   ngOnInit() {

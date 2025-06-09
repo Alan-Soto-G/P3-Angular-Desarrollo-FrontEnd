@@ -13,12 +13,15 @@ import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { RolesComponent } from '../../pages/roles/roles.component';
-import {PasswordComponent} from '../../pages/password/password.component';
+import { PasswordComponent } from '../../pages/password/password.component';
+import { DevicesComponent } from '../../pages/devices/devices.component';
+import { AddressComponent } from '../../pages/address/address.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // import { ToastrModule } from 'ngx-toastr';
 
-@NgModule({  imports: [
+@NgModule({
+  imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
@@ -27,14 +30,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
     ComponentsModule,
     ClipboardModule // Agregar ClipboardModule aquí
-  ],declarations: [
+  ],
+  declarations: [
     DashboardComponent,
     UserProfileComponent,
     TablesComponent,
     IconsComponent,
     MapsComponent,
     RolesComponent,
-    PasswordComponent
+    PasswordComponent,
+    DevicesComponent,
+    AddressComponent
   ]
 })
 

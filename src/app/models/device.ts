@@ -1,9 +1,9 @@
-import { User } from './user.model';
-
-export class Device {
-    id: number;
-    id_user: User;
+export interface Device {
+    id?: number;
     name: string;
     ip: string;
     operating_system: string;
+    user_id?: number;
+    created_at?: string;
+    updated_at?: string;
 }

@@ -23,8 +23,7 @@ export class SecurityService {
   */
   login(user: User): Observable<any> {
     return this.http.post<any>(`${environment.url_ms_security}/login`, user);
-  }
-  /*
+  }  /*
   Guardar la información de usuario en el local storage
   */
   saveSession(dataSesion: any) {
@@ -33,7 +32,8 @@ export class SecurityService {
       name: dataSesion["user"]["name"],
       email: dataSesion["user"]["email"],
       password: "",
-      token: dataSesion["token"]
+      token: dataSesion["token"],
+      picture: dataSesion["user"]["picture"] || null // Guardar la foto de perfil
     };
     localStorage.setItem('sesion', JSON.stringify(data));
     this.setUser(data);
@@ -63,7 +63,6 @@ export class SecurityService {
     return this.theUser.value;
   }
 
-
   /**
   * Permite cerrar la sesión del usuario
   * que estaba previamente logueado
@@ -71,6 +70,7 @@ export class SecurityService {
   logout() {
     localStorage.removeItem('sesion');
     this.setUser(new User());
+    this.router.navigate(['/login']);
   }
   /**
   * Permite verificar si actualmente en el local storage

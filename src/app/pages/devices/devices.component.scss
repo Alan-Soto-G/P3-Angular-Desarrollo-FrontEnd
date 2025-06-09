@@ -1,0 +1,163 @@
+/* Devices Component Styles */
+
+.devices-container {
+  padding: 20px;
+}
+
+.devices-header {
+  margin-bottom: 30px;
+}
+
+.device-stats {
+  margin-bottom: 20px;
+}
+
+.device-card {
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.device-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.device-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.device-info {
+  .device-name {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .device-details {
+    font-size: 0.9rem;
+    color: #666;
+  }
+}
+
+.device-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.btn-device {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.btn-device:hover {
+  transform: translateY(-1px);
+}
+
+.device-status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.status-active {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-inactive {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.auto-detect-btn {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  color: #495057;
+  transition: all 0.2s ease;
+}
+
+.auto-detect-btn:hover {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.device-form {
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-control {
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  .form-control:focus {
+    border-color: #5e72e4;
+    box-shadow: 0 0 0 0.2rem rgba(94, 114, 228, 0.25);
+  }
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.no-devices {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.device-table {
+  .table {
+    margin-bottom: 0;
+  }
+  
+  .table thead th {
+    border-top: none;
+    font-weight: 600;
+    color: #333;
+    background-color: #f8f9fa;
+  }
+  
+  .table td {
+    vertical-align: middle;
+  }
+}
+
+.info-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  
+  .card-body {
+    padding: 2rem;
+  }
+  
+  h4 {
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+  
+  ul {
+    padding-left: 1.5rem;
+  }
+  
+  p, li {
+    opacity: 0.9;
+  }
+}

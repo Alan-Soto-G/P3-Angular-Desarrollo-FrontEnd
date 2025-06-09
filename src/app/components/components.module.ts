@@ -6,23 +6,25 @@ import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TableCrudComponent } from './table-crud/table-crud.component';
+import { ProfilePictureComponent } from './profile-picture/profile-picture.component';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     NgbModule
-  ],
-  declarations: [
+  ],  declarations: [
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
-    TableCrudComponent
+    TableCrudComponent,
+    ProfilePictureComponent
   ],  exports: [
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
-    TableCrudComponent
+    TableCrudComponent,
+    ProfilePictureComponent
   ]
 })
 
