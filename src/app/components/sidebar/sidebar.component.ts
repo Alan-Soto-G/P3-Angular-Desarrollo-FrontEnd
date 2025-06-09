@@ -20,10 +20,10 @@ export const ROUTES: RouteInfo[] = [
   { path: '/login', title: 'Login', icon: 'ni-key-25 text-info', class: '', type: 0 },
   { path: '/register', title: 'Register', icon: 'ni-circle-08 text-pink', class: '', type: 0 },
   { path: '/theaters/list', title: 'Teatros', icon: 'ni-circle-08 text-pink', class: '', type: 1 },
-  { path: '/address', title: 'Address', icon: 'ni-circle-08 text-pink', class: '', type: 2 },
-  { path: '/address/new/:userId', title: 'Crear Dirección', icon: 'ni-fat-add text-green', class: '', type: 2 },
-  { path: '/password', title: 'Passwords', icon: 'ni-lock-circle-open text-purple', class: '', type: 2 },
-  { path: '/password/create/:userId', title: 'Crear Contraseña', icon: 'ni-fat-add text-green', class: '', type: 2 }
+  { path: '/address', title: 'Address', icon: 'ni-circle-08 text-pink', class: '', type: 1 },
+  { path: '/address/new/:userId', title: 'Crear Dirección', icon: 'ni-fat-add text-green', class: '', type: 1 },
+  { path: '/password', title: 'Passwords', icon: 'ni-lock-circle-open text-purple', class: '', type: 1 },
+  { path: '/password/create/:userId', title: 'Crear Contraseña', icon: 'ni-fat-add text-green', class: '', type: 1 }
 
 ];
 
