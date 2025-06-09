@@ -19,7 +19,24 @@ export class TableCrudComponent implements OnInit {
   // Eventos que emite
   @Output() onAdd = new EventEmitter<void>();     // Evento del botón añadir
   @Output() onRowClick = new EventEmitter<any>(); // Evento al hacer click en una fila
-  @Output() onButtonClick = new EventEmitter<{action: string, row: any, index: number}>(); // Evento de botones de acción
+  @Output() onButtonClick = new EventEmitter<{ action: string, row: any, index: number }>(); // Evento de botones de acción
+  // Dentro de la clase TableCrudComponent
+@Output() onCreateSession = new EventEmitter<any>();
+
+// Método para manejar el click del botón crear sesión
+handleCreateSessionClick(row: any, index: number) {
+  this.onCreateSession.emit(row);
+}
+
+// Método auxiliar para obtener el nombre de la propiedad de manera genérica
+getPropertyName(header: string): string {
+  // Mapeo especial para headers con acentos
+  if (header.trim().toLowerCase() === 'método') {
+    return 'method';
+  }
+  // Para otros headers, se transforma a lowercase y se reemplazan espacios por guion bajo
+  return header.toLowerCase().replace(/\s+/g, '_');
+}
 
   constructor() { }
 

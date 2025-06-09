@@ -19,13 +19,26 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthenticatedGuard } from './guardians/authenticated.guard';
 import { NoAuthenticatedGuard } from './guardians/no-authenticated.guard';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { PermissionsComponent } from './pages/permissions/permissions.component';
+import { PermissionService } from './services/permission.service';
+import { SessionsComponent } from './pages/sessions/sessions.component';
+import { RolePermissionsComponent } from './pages/role-permissions/role-permissions.component';
+import { PagesComponent } from './pages/pages.component';
+import { ProfilesComponent } from './pages/profiles/profiles.component'; 
+import { ProfileService } from './services/profile.service'; // 👈 AGREGAR ESTA LÍNEA
+
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    AddressComponent
+    AddressComponent,
+    PermissionsComponent,
+    SessionsComponent,
+    RolePermissionsComponent,
+    PagesComponent,
+    ProfilesComponent
   ],
   imports: [
     GoogleMapsModule,
@@ -41,7 +54,10 @@ import { GoogleMapsModule } from '@angular/google-maps';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AuthenticatedGuard,
-    NoAuthenticatedGuard
+    NoAuthenticatedGuard,
+    PermissionService ,// 👈 AGREGAR ESTA LÍNEA
+    ProfileService // 👈 AGREGAR ESTA LÍNEA
+
   ],
   bootstrap: [AppComponent]
 })

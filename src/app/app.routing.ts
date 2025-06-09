@@ -8,6 +8,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { AddressComponent } from './pages/address/address.component'; // <-- Asegúrate de importar esto
 import { PasswordComponent } from './pages/password/password.component';
+import { PermissionsComponent } from './pages/permissions/permissions.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -30,8 +31,10 @@ export const routes: Routes = [
       // Aquí rutas de password. 
       { path: 'password', component: PasswordComponent },
       { path: 'password/create/:userId', component: PasswordComponent },
-      { path: 'password/edit/:id', component: PasswordComponent }
-    ]
+      { path: 'password/edit/:id', component: PasswordComponent },
+
+      //Rutas permisos
+       ]
   },
   {
     path: '',
