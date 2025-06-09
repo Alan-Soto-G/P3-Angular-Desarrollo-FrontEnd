@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -18,7 +17,6 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthenticatedGuard } from './guardians/authenticated.guard';
 import { NoAuthenticatedGuard } from './guardians/no-authenticated.guard';
 
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -28,7 +26,7 @@ import { NoAuthenticatedGuard } from './guardians/no-authenticated.guard';
     ComponentsModule,
     NgbModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   declarations: [
     AppComponent,

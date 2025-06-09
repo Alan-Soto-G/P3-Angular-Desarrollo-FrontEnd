@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class SecurityService {
 
   theUser = new BehaviorSubject<User>(new User);
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private router: Router) { 
     this.verifyActualSession()
   }
 
@@ -33,7 +33,6 @@ export class SecurityService {
       name: dataSesion["user"]["name"],
       email: dataSesion["user"]["email"],
       password: "",
-      //role:dataSesion["user"]["role"],
       token: dataSesion["token"]
     };
     localStorage.setItem('sesion', JSON.stringify(data));
@@ -99,5 +98,35 @@ export class SecurityService {
   getSessionData() {
     let sesionActual = localStorage.getItem('sesion');
     return sesionActual;
+  }
+
+  // Login con Google - envía el token al backend
+  loginWithGoogle(googleToken: string): Observable<any> {
+    return this.http.post(`${environment.url_ms_security}/auth/google`, {
+      token: googleToken
+    });
+  }
+
+  // Procesar respuesta de Google y guardar como siempre
+  processGoogleLogin(googleUser: any): void {
+    this.loginWithGoogle(googleUser.idToken).subscribe({
+      next: (data) => {
+        // Usar el mismo método que ya tienes
+        this.saveSession(data);
+        this.router.navigate(["dashboard"]);
+      },
+      error: (error) => {
+        console.error('Error en login con Google:', error);
+      }
+    });
+  }
+
+  getToken(): string {
+    let currentSession = this.activeUserSession; // Cambiar esto
+    if (currentSession) {
+      return currentSession.token;
+    } else {
+      return "";
+    }
   }
 }

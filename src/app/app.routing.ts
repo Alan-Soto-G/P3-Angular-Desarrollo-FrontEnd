@@ -40,7 +40,8 @@ const routes: Routes =[
     CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes,{
-      useHash: true
+      useHash: false, // Cambiar esto a false
+      enableTracing: false
     })
   ],
   exports: [

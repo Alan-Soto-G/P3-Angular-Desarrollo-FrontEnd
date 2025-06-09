@@ -1,0 +1,20 @@
+<!-- Componente de tabla CRUD para usuarios -->
+<app-table-crud
+  [title]="title"
+  [headers]="headers"
+  [data]="displayData"
+  [isLoading]="isLoading"
+  addButtonText="Crear Usuario"
+  (onAdd)="onAddUser()"
+  (onRowClick)="onRowClick($event)">
+</app-table-crud>
+
+<!-- Loading overlay (opcional) -->
+<div *ngIf="isLoading" class="loading-overlay">
+  <div class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Cargando...</span>
+    </div>
+    <p class="mt-3 text-muted">Cargando usuarios...</p>
+  </div>
+</div>

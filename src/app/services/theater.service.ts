@@ -10,21 +10,21 @@ import { environment } from 'src/environments/environment';
 export class TheaterService {
   constructor(private http: HttpClient) { }
   list(): Observable<Theater[]> {
-    return this.http.get<Theater[]>(`${environment.url_ms_cinema}/theaters`);
+    return this.http.get<Theater[]>(`${environment.url_ms_security}/theaters`);
   }
   view(id: number): Observable<Theater> {
-    return this.http.get<Theater>(`${environment.url_ms_cinema}/theaters/${id}`);
+    return this.http.get<Theater>(`${environment.url_ms_security}/theaters/${id}`);
   }
   create(newTheater: Theater): Observable<Theater> {
     delete newTheater.id;
-    return this.http.post<Theater>(`${environment.url_ms_cinema}/theaters`, newTheater);
+    return this.http.post<Theater>(`${environment.url_ms_security}/theaters`, newTheater);
   }
   update(theTheater: Theater): Observable<Theater> {
-    return this.http.put<Theater>(`${environment.url_ms_cinema}/theaters/${theTheater.id}`, theTheater);
+    return this.http.put<Theater>(`${environment.url_ms_security}/theaters/${theTheater.id}`, theTheater);
   }
 
   delete(id: number) {
-    return this.http.delete<Theater>(`${environment.url_ms_cinema}/theaters/${id}`);
+    return this.http.delete<Theater>(`${environment.url_ms_security}/theaters/${id}`);
   }
 
 }
