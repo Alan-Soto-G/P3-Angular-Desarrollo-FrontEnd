@@ -193,6 +193,24 @@ export class PasswordComponent implements OnInit {
       return '✅ Activa';
     }
   }
+  // Métodos para contar contraseñas por estado
+  getActivePasswordsCount(): number {
+    return this.displayData.filter(password => 
+      password.estado === '✅ Activa'
+    ).length;
+  }
+
+  getExpiredPasswordsCount(): number {
+    return this.displayData.filter(password => 
+      password.estado === '❌ Expirada'
+    ).length;
+  }
+
+  getPendingPasswordsCount(): number {
+    return this.displayData.filter(password => 
+      password.estado === '⏳ Pendiente'
+    ).length;
+  }
   // Generar contraseña segura aleatoria mejorada
   generateSecurePassword(length: number = 12): string {
     const lowercase = 'abcdefghijklmnopqrstuvwxyz';

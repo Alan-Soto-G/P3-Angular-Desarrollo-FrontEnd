@@ -1,1 +1,126 @@
-<h1>Users</h1>
+
+<!-- Header Section -->
+<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+            <!-- Card stats -->
+            <div class="row">
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card card-stats mb-4 mb-xl-0">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Total Usuarios</h5>
+                                    <span class="h2 font-weight-bold mb-0">{{ displayData.length }}</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-primary text-white rounded-circle shadow">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card card-stats mb-4 mb-xl-0">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Usuarios Activos</h5>
+                                    <span class="h2 font-weight-bold mb-0">{{ displayData.length }}</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-success text-white rounded-circle shadow">
+                                        <i class="fas fa-user-check"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card card-stats mb-4 mb-xl-0">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Administradores</h5>
+                                    <span class="h2 font-weight-bold mb-0">2</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                                        <i class="fas fa-user-shield"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-6">
+                    <div class="card card-stats mb-4 mb-xl-0">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Nuevos Hoy</h5>
+                                    <span class="h2 font-weight-bold mb-0">0</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                                        <i class="fas fa-user-plus"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container-fluid mt--7">
+    <div class="row">
+        <div class="col">
+            <!-- CRUD Table Component -->
+            <app-table-crud [title]="title" [headers]="headers" [data]="displayData" [isLoading]="isLoading"
+                addButtonText="Crear Usuario" (onAdd)="onAddUser()" (onRowClick)="onRowClick($event)">
+            </app-table-crud>
+        </div>
+    </div>
+
+    <!-- Additional Information Card -->
+    <div class="row mt-4">
+        <div class="col-xl-12">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="mb-0">Información sobre Gestión de Usuarios</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="text-sm font-weight-bold text-primary">¿Qué es la gestión de usuarios?</h4>
+                            <p class="text-sm text-muted">
+                                La gestión de usuarios permite administrar cuentas de usuario, asignar roles, 
+                                configurar permisos y mantener la seguridad del sistema.
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="text-sm font-weight-bold text-primary">Funciones principales</h4>
+                            <ul class="text-sm text-muted">
+                                <li><strong>Crear usuarios:</strong> Registrar nuevos usuarios en el sistema</li>
+                                <li><strong>Editar perfiles:</strong> Modificar información de usuarios existentes</li>
+                                <li><strong>Gestionar accesos:</strong> Controlar permisos y roles</li>
+                                <li><strong>Monitorear actividad:</strong> Seguimiento de sesiones y acciones</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

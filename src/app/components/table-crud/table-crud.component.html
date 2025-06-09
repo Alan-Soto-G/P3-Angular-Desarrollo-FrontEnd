@@ -1,0 +1,78 @@
+<!-- Card con la tabla -->
+<div class="card shadow">
+    <!-- Card header con título y botón -->
+    <div class="card-header bg-transparent">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="mb-0">{{ title }}</h3>
+            </div>
+            <div class="col text-right" *ngIf="showAddButton">
+                <button class="btn btn-success" (click)="handleAddClick()">
+                    <i class="fas fa-plus"></i> {{ addButtonText }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card body con la tabla -->
+    <div class="card-body">
+        <!-- Loading state -->
+        <div *ngIf="isLoading" class="text-center py-4">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Cargando...</span>
+            </div>
+            <p class="mt-2 text-muted">Cargando datos...</p>
+        </div>
+
+        <!-- Table content -->
+        <div class="table-responsive" *ngIf="!isLoading">
+            <table class="table align-items-center table-flush">
+                <!-- Encabezados de la tabla -->
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col" *ngFor="let header of headers">
+                            {{ header }}
+                        </th>
+                        <th scope="col" *ngIf="buttons && buttons.length > 0" class="text-center">
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
+
+                <!-- Cuerpo de la tabla -->
+                <tbody>
+                    <!-- Fila por cada elemento en data -->
+                    <tr *ngFor="let row of data; let i = index" (click)="handleRowClick(row, i)"
+                        style="cursor: pointer;">
+
+                        <!-- Celdas dinámicas basadas en los headers -->
+                        <td *ngFor="let header of headers; let j = index" class="text-sm">
+                            {{ getValueForHeader(row, header, j) }}
+                        </td>
+
+                        <!-- Celda de acciones con botones -->
+                        <td *ngIf="buttons && buttons.length > 0" class="text-center">
+                            <button *ngFor="let button of buttons" 
+                                    [class]="'btn ' + button.class + ' mr-1'"
+                                    (click)="handleButtonClick(button.label, row, i); $event.stopPropagation()"
+                                    [title]="button.label">
+                                <i [class]="'fas ' + button.icon" *ngIf="button.icon"></i>
+                                <span *ngIf="!button.icon">{{ button.label }}</span>
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Mensaje cuando no hay datos -->
+                    <tr *ngIf="data.length === 0">
+                        <td [attr.colspan]="headers.length + (buttons?.length > 0 ? 1 : 0)" class="text-center py-4">
+                            <div class="text-muted">
+                                <i class="fas fa-inbox fa-2x mb-3"></i>
+                                <p>No hay datos disponibles</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
