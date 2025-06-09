@@ -7,15 +7,21 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { UsersComponent } from '../../pages/users/users.component';
 import { RolesComponent } from '../../pages/roles/roles.component';
-import {PasswordComponent} from '../../pages/password/password.component';
+// Combinar AMBOS imports sin duplicar
+import { SessionsComponent } from '../../pages/sessions/sessions.component';
+import { PermissionsComponent } from '../../pages/permissions/permissions.component';
+import { RolePermissionsComponent } from '../../pages/role-permissions/role-permissions.component';
+import { PasswordComponent } from '../../pages/password/password.component';
 import { AuthenticatedGuard } from 'src/app/guardians/authenticated.guard';
+import { ProfilesComponent } from 'src/app/pages/profiles/profiles.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'user-profile', component: UserProfileComponent },
     { path: 'tables', component: TablesComponent },
     { path: 'icons', component: IconsComponent },
-    { path: 'maps', component: MapsComponent },    { 
+    { path: 'maps', component: MapsComponent },
+    { 
         path: 'users', 
         component: UsersComponent,
         //canActivate: [AuthenticatedGuard]
@@ -23,6 +29,26 @@ export const AdminLayoutRoutes: Routes = [
     { 
         path: 'roles', 
         component: RolesComponent,
+        //canActivate: [AuthenticatedGuard]
+    },
+    { 
+        path: 'permissions', 
+        component: PermissionsComponent,
+        //canActivate: [AuthenticatedGuard]
+    },
+    { 
+        path: 'role-permissions', 
+        component: RolePermissionsComponent,
+        //canActivate: [AuthenticatedGuard]
+    },
+    { 
+        path: 'sessions', 
+        component: SessionsComponent,
+        //canActivate: [AuthenticatedGuard]
+    },
+     { 
+        path: 'profiles', 
+        component: ProfilesComponent,
         //canActivate: [AuthenticatedGuard]
     },
     {

@@ -1,4 +1,3 @@
-
 <!-- Header Section -->
 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
     <div class="container-fluid">
@@ -82,9 +81,16 @@
 <div class="container-fluid mt--7">
     <div class="row">
         <div class="col">
-            <!-- CRUD Table Component -->
-            <app-table-crud [title]="title" [headers]="headers" [data]="displayData" [isLoading]="isLoading"
-                addButtonText="Crear Usuario" (onAdd)="onAddUser()" (onRowClick)="onRowClick($event)">
+            <!-- CRUD Table Component - COMBINANDO ambas versiones -->
+            <app-table-crud 
+                [title]="title" 
+                [headers]="headers" 
+                [data]="displayData" 
+                [isLoading]="isLoading"
+                addButtonText="Crear Usuario" 
+                (onAdd)="onAddUser()" 
+                (onRowClick)="onRowClick($event)"
+                (onCreateSession)="onCreateSession($event)">
             </app-table-crud>
         </div>
     </div>

@@ -16,11 +16,12 @@ export class TableCrudComponent implements OnInit {
   @Input() addButtonText: string = 'Añadir'; // Texto del botón añadir
   @Input() isLoading: boolean = false;      // Estado de carga
 
-  // Eventos que emite
+  // Eventos que emite - COMBINANDO AMBOS
   @Output() onAdd = new EventEmitter<void>();     // Evento del botón añadir
   @Output() onRowClick = new EventEmitter<any>(); // Evento al hacer click en una fila
-  @Output() onButtonClick = new EventEmitter<{action: string, row: any, index: number}>(); // Evento de botones de acción
+  @Output() onButtonClick = new EventEmitter<{ action: string, row: any, index: number }>(); // Evento de botones de acción
   @Output() onEmojiClick = new EventEmitter<{action: string, row: any, index: number}>(); // Evento específico para botones emoji
+  @Output() onCreateSession = new EventEmitter<any>(); // Evento para crear sesión
 
   constructor() { }
 
@@ -29,7 +30,7 @@ export class TableCrudComponent implements OnInit {
     console.log('Title:', this.title);
     console.log('Headers:', this.headers);
     console.log('Data:', this.data);
-    console.log('Buttons:', this.buttons); // Para uso futuro
+    console.log('Buttons:', this.buttons);
   }
 
   // Método para manejar el click del botón añadir
@@ -47,6 +48,11 @@ export class TableCrudComponent implements OnInit {
     this.onButtonClick.emit({ action, row, index });
   }
 
+  // Método para manejar el click del botón crear sesión
+  handleCreateSessionClick(row: any, index: number) {
+    this.onCreateSession.emit(row);
+  }
+
   /**
    * Maneja el click en botones específicos (emojis)
    */
@@ -60,6 +66,16 @@ export class TableCrudComponent implements OnInit {
   getObjectValues(obj: any): any[] {
     if (!obj) return [];
     return Object.values(obj);
+  }
+
+  // Método auxiliar para obtener el nombre de la propiedad de manera genérica
+  getPropertyName(header: string): string {
+    // Mapeo especial para headers con acentos
+    if (header.trim().toLowerCase() === 'método') {
+      return 'method';
+    }
+    // Para otros headers, se transforma a lowercase y se reemplazan espacios por guion bajo
+    return header.toLowerCase().replace(/\s+/g, '_');
   }
 
   /**
@@ -83,5 +99,4 @@ export class TableCrudComponent implements OnInit {
     const values = Object.values(row);
     return values[index] || '';
   }
-
 }
