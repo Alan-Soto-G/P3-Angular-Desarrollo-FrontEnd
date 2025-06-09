@@ -82,12 +82,18 @@ export class PasswordComponent implements OnInit {
       this.isNew = false;
       this.loadPasswords();
     }
+    console.log('viewMode:', this.viewMode);
   }
 
   // ------------------- API -------------------
 
   listAll(): Observable<PasswordResponse[]> {
-    return this.http.get<PasswordResponse[]>(`${this.baseUrl}`);
+    return this.http.get<PasswordResponse[]>(`${this.baseUrl}`).pipe(
+      catchError(err => {
+        console.error('Error al cargar contraseñas:', err);
+        return of([]);
+      })
+    );
   }
 
   getById(id: number): Observable<Password> {
