@@ -7,6 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { AddressComponent } from './pages/address/address.component'; // <-- Asegúrate de importar esto
+import { PasswordComponent } from './pages/password/password.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -24,7 +25,12 @@ export const routes: Routes = [
       // 👇 Aquí se define la ruta directamente a AddressComponent
       { path: 'address', component: AddressComponent },
       { path: 'address/create/:userId', component: AddressComponent },
-      { path: 'address/edit/:id', component: AddressComponent }
+      { path: 'address/edit/:id', component: AddressComponent },
+
+      // Aquí rutas de password. 
+      { path: 'password', component: PasswordComponent },
+      { path: 'password/create/:userId', component: PasswordComponent },
+      { path: 'password/edit/:id', component: PasswordComponent }
     ]
   },
   {
@@ -47,7 +53,10 @@ export const routes: Routes = [
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes, { useHash: true })
+    RouterModule.forRoot(routes,{
+      useHash: false, // Cambiar esto a false
+      enableTracing: false
+    })
   ],
   exports: [RouterModule]
 })

@@ -11,7 +11,10 @@ import { IconsComponent } from '../../pages/icons/icons.component';
 import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
+import { UsersComponent } from '../../pages/users/users.component';
+import { RolesComponent } from '../../pages/roles/roles.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ComponentsModule } from '../../components/components.module';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -19,16 +22,19 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
-  ],
-  declarations: [
+    ClipboardModule,
+    ComponentsModule
+  ],  declarations: [
     DashboardComponent,
     UserProfileComponent,
     TablesComponent,
     IconsComponent,
-    MapsComponent
+    MapsComponent,
+    UsersComponent,
+    RolesComponent
   ]
 })
 

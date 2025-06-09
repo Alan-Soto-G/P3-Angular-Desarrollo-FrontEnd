@@ -14,7 +14,7 @@ export class WebSocketService extends Socket {
     const userId = securityService.activeUserSession?.email || ''; // Asegúrate de que no sea nulo
     
     super({
-      url: environment.url_ms_cinema,
+      url: environment.url_ms_security,
       options: {
         query: {
           "user_id": userId
