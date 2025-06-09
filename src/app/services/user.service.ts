@@ -30,7 +30,7 @@ export class UserService {
     }
 
     // Actualizar usuario
-    update(theUser: User): Observable<User> {
+    update(id: number, p0: { name: any; email: any; }, theUser: User): Observable<User> {
         return this.http.put<User>(`${environment.url_ms_security}/users/${theUser.id}`, theUser);
     }
 

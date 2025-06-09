@@ -1,0 +1,13 @@
+<div>
+  <h1>{{title}}</h1>
+  <p>Componente de Perfiles funcionando!</p>
+  
+  <app-table-crud
+    [title]="title"
+    [headers]="headers"
+    [data]="displayData"
+    [isLoading]="isLoading"
+    (onRowClick)="onRowClick($event)"
+    (onAdd)="onAddProfile()">
+  </app-table-crud>
+</div>

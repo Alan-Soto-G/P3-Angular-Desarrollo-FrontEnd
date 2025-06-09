@@ -34,7 +34,7 @@
     "google-auth-library": "^9.15.1",
     "leaflet": "^1.9.4",
     "ngx-clipboard": "15.0.1",
-    "ngx-socket-io": "^4.3.0",
+    "ngx-socket-io": "^3.3.1",
     "ngx-toastr": "14.2.2",
     "nouislider": "15.5.1",
     "rxjs": "~7.5.0",

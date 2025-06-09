@@ -1,4 +1,3 @@
-// src/app/app.routing.ts
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,6 +8,8 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { AddressComponent } from './pages/address/address.component';
 import { PasswordComponent } from './pages/password/password.component';
+import { UsersComponent } from './pages/users/users.component';
+import { PermissionsComponent } from './pages/permissions/permissions.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -28,10 +29,16 @@ export const routes: Routes = [
       { path: 'address/create/:userId', component: AddressComponent, canActivate: [AuthenticatedGuard] },
       { path: 'address/edit/:id', component: AddressComponent, canActivate: [AuthenticatedGuard] },
 
-      // Rutas de Password protegidas
+      // Rutas de Password protegidas (ELIMINAR DUPLICADOS)
       { path: 'password', component: PasswordComponent, canActivate: [AuthenticatedGuard] },
       { path: 'password/create/:userId', component: PasswordComponent, canActivate: [AuthenticatedGuard] },
-      { path: 'password/edit/:id', component: PasswordComponent, canActivate: [AuthenticatedGuard] }
+      { path: 'password/edit/:id', component: PasswordComponent, canActivate: [AuthenticatedGuard] },
+
+      // Rutas de Permisos
+      { path: 'permissions', component: PermissionsComponent, canActivate: [AuthenticatedGuard] },
+
+      // Rutas de Users protegidas
+      { path: 'users', component: UsersComponent, canActivate: [AuthenticatedGuard] },
     ]
   },
   {

@@ -1,0 +1,17 @@
+<app-table-crud
+  [title]="title"
+  [headers]="headers"
+  [data]="displayData"
+  [isLoading]="isLoading"
+  [showAddButton]="false"
+  (onRowClick)="onRowClick($event)">
+</app-table-crud>
+
+<div *ngIf="isLoading" class="loading-overlay">
+  <div class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Cargando...</span>
+    </div>
+    <p class="mt-3 text-muted">Cargando sesiones...</p>
+  </div>
+</div>
