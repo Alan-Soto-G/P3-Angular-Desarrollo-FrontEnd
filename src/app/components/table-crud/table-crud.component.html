@@ -118,15 +118,25 @@
                   <ng-container *ngIf="title === 'Gestión de Perfiles'">
                     <td class="text-sm">{{ row.id }}</td>
                     <td class="text-sm">{{ row.usuario }}</td>
+                    <td class="text-sm">{{ row.email }}</td>
                     <td class="text-sm">{{ row.telefono }}</td>
-                    <td class="text-center">{{ row.foto }}</td>
+                    <td class="text-center">
+                      <div *ngIf="row.fotoUrl; else noPhoto" style="width: 50px; height: 50px; overflow: hidden; border-radius: 50%; margin: 0 auto;">
+                        <img [src]="row.fotoUrl" 
+                             alt="Foto de perfil" 
+                             style="width: 100%; height: 100%; object-fit: cover;">
+                      </div>
+                      <ng-template #noPhoto>
+                        <span class="text-muted">Sin foto</span>
+                      </ng-template>
+                    </td>
                     <td class="text-sm">{{ row.acciones }}</td>
                   </ng-container>
 
                   <!-- Para otras tablas: mostrar datos genéricos -->
                   <ng-container *ngIf="title !== 'Gestión de Usuarios' && title !== 'Gestión de Sesiones' && title !== 'Gestión de Perfiles'">
                     <td class="text-sm" *ngFor="let header of headers; let j = index">
-                      {{ row[getPropertyName(header)] }}
+                      {{ getValueForHeader(row, header, j) }}
                     </td>
                   </ng-container>
 

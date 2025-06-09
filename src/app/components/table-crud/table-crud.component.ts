@@ -16,27 +16,12 @@ export class TableCrudComponent implements OnInit {
   @Input() addButtonText: string = 'Añadir'; // Texto del botón añadir
   @Input() isLoading: boolean = false;      // Estado de carga
 
-  // Eventos que emite
+  // Eventos que emite - COMBINANDO AMBOS
   @Output() onAdd = new EventEmitter<void>();     // Evento del botón añadir
   @Output() onRowClick = new EventEmitter<any>(); // Evento al hacer click en una fila
   @Output() onButtonClick = new EventEmitter<{ action: string, row: any, index: number }>(); // Evento de botones de acción
-  // Dentro de la clase TableCrudComponent
-@Output() onCreateSession = new EventEmitter<any>();
-
-// Método para manejar el click del botón crear sesión
-handleCreateSessionClick(row: any, index: number) {
-  this.onCreateSession.emit(row);
-}
-
-// Método auxiliar para obtener el nombre de la propiedad de manera genérica
-getPropertyName(header: string): string {
-  // Mapeo especial para headers con acentos
-  if (header.trim().toLowerCase() === 'método') {
-    return 'method';
-  }
-  // Para otros headers, se transforma a lowercase y se reemplazan espacios por guion bajo
-  return header.toLowerCase().replace(/\s+/g, '_');
-}
+  @Output() onEmojiClick = new EventEmitter<{action: string, row: any, index: number}>(); // Evento específico para botones emoji
+  @Output() onCreateSession = new EventEmitter<any>(); // Evento para crear sesión
 
   constructor() { }
 
@@ -45,7 +30,7 @@ getPropertyName(header: string): string {
     console.log('Title:', this.title);
     console.log('Headers:', this.headers);
     console.log('Data:', this.data);
-    console.log('Buttons:', this.buttons); // Para uso futuro
+    console.log('Buttons:', this.buttons);
   }
 
   // Método para manejar el click del botón añadir
@@ -63,10 +48,55 @@ getPropertyName(header: string): string {
     this.onButtonClick.emit({ action, row, index });
   }
 
+  // Método para manejar el click del botón crear sesión
+  handleCreateSessionClick(row: any, index: number) {
+    this.onCreateSession.emit(row);
+  }
+
+  /**
+   * Maneja el click en botones específicos (emojis)
+   */
+  handleEmojiButtonClick(action: string, row: any, index: number, event: Event): void {
+    event.stopPropagation(); // Evitar que se active el click de la fila
+    console.log('Emoji button clicked:', action, row);
+    this.onEmojiClick.emit({ action, row, index });
+  }
+
   // Método helper para obtener el valor de una propiedad del objeto
   getObjectValues(obj: any): any[] {
     if (!obj) return [];
     return Object.values(obj);
   }
 
+  // Método auxiliar para obtener el nombre de la propiedad de manera genérica
+  getPropertyName(header: string): string {
+    // Mapeo especial para headers con acentos
+    if (header.trim().toLowerCase() === 'método') {
+      return 'method';
+    }
+    // Para otros headers, se transforma a lowercase y se reemplazan espacios por guion bajo
+    return header.toLowerCase().replace(/\s+/g, '_');
+  }
+
+  /**
+   * Obtiene el valor correspondiente a un header específico
+   */
+  getValueForHeader(row: any, header: string, index: number): any {
+    if (!row) return '';
+    
+    // Primero intentar acceso directo por nombre del header
+    const headerLower = header.toLowerCase();
+    const keys = Object.keys(row);
+    
+    // Buscar clave que coincida con el header
+    for (const key of keys) {
+      if (key.toLowerCase() === headerLower) {
+        return row[key];
+      }
+    }
+    
+    // Si no encuentra coincidencia, usar el índice del header
+    const values = Object.values(row);
+    return values[index] || '';
+  }
 }

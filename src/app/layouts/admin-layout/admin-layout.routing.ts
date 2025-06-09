@@ -7,11 +7,12 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { UsersComponent } from '../../pages/users/users.component';
 import { RolesComponent } from '../../pages/roles/roles.component';
+// Combinar AMBOS imports sin duplicar
 import { SessionsComponent } from '../../pages/sessions/sessions.component';
 import { PermissionsComponent } from '../../pages/permissions/permissions.component';
 import { RolePermissionsComponent } from '../../pages/role-permissions/role-permissions.component';
+import { PasswordComponent } from '../../pages/password/password.component';
 import { AuthenticatedGuard } from 'src/app/guardians/authenticated.guard';
-import { profile } from 'console';
 import { ProfilesComponent } from 'src/app/pages/profiles/profiles.component';
 
 export const AdminLayoutRoutes: Routes = [
@@ -48,6 +49,11 @@ export const AdminLayoutRoutes: Routes = [
      { 
         path: 'profiles', 
         component: ProfilesComponent,
+        //canActivate: [AuthenticatedGuard]
+    },
+    {
+        path: 'passwords',
+        component: PasswordComponent,
         //canActivate: [AuthenticatedGuard]
     },
     {

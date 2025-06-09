@@ -1,12 +1,12 @@
-// src/app/app.routing.ts
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthenticatedGuard } from './guardians/authenticated.guard';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
-import { AddressComponent } from './pages/address/address.component'; // <-- Asegúrate de importar esto
+import { AddressComponent } from './pages/address/address.component';
 import { PasswordComponent } from './pages/password/password.component';
 import { PermissionsComponent } from './pages/permissions/permissions.component';
 
@@ -23,18 +23,19 @@ export const routes: Routes = [
             m => m.AdminLayoutModule
           )
       },
-      // 👇 Aquí se define la ruta directamente a AddressComponent
-      { path: 'address', component: AddressComponent },
-      { path: 'address/create/:userId', component: AddressComponent },
-      { path: 'address/edit/:id', component: AddressComponent },
+      // Rutas de Address protegidas
+      { path: 'address', component: AddressComponent, canActivate: [AuthenticatedGuard] },
+      { path: 'address/create/:userId', component: AddressComponent, canActivate: [AuthenticatedGuard] },
+      { path: 'address/edit/:id', component: AddressComponent, canActivate: [AuthenticatedGuard] },
 
-      // Aquí rutas de password. 
-      { path: 'password', component: PasswordComponent },
-      { path: 'password/create/:userId', component: PasswordComponent },
-      { path: 'password/edit/:id', component: PasswordComponent },
+      // Rutas de Password protegidas (ELIMINAR DUPLICADOS)
+      { path: 'password', component: PasswordComponent, canActivate: [AuthenticatedGuard] },
+      { path: 'password/create/:userId', component: PasswordComponent, canActivate: [AuthenticatedGuard] },
+      { path: 'password/edit/:id', component: PasswordComponent, canActivate: [AuthenticatedGuard] },
 
-      //Rutas permisos
-       ]
+      // Rutas de Permisos
+      { path: 'permissions', component: PermissionsComponent, canActivate: [AuthenticatedGuard] }
+    ]
   },
   {
     path: '',
@@ -56,8 +57,8 @@ export const routes: Routes = [
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes,{
-      useHash: false, // Cambiar esto a false
+    RouterModule.forRoot(routes, {
+      useHash: false,
       enableTracing: false
     })
   ],
