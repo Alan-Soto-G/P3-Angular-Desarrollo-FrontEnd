@@ -1,57 +1,46 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Role } from '../models/role.model';
 import { environment } from '../../environments/environment';
-
-export interface Role {
-    _id: string;
-    name: string;
-    description: string;
-    permissions?: string[];
-    created_at?: Date;
-    updated_at?: Date;
-}
 
 @Injectable({
     providedIn: 'root'
 })
 export class RoleService {
-    private baseUrl = `${environment.url_ms_security}/roles`;
 
     constructor(private http: HttpClient) { }
 
-    /**
-     * Get all roles
-     */
+    // Obtener todos los roles: GET /api/roles
     list(): Observable<Role[]> {
-        return this.http.get<Role[]>(this.baseUrl);
+        return this.http.get<Role[]>(`${environment.url_ms_security}/roles`);
     }
 
-    /**
-     * Get role by ID
-     */
-    view(id: string): Observable<Role> {
-        return this.http.get<Role>(`${this.baseUrl}/${id}`);
+    // Obtener rol por ID: GET /api/roles/{id}
+    view(id: number): Observable<Role> {
+        return this.http.get<Role>(`${environment.url_ms_security}/roles/${id}`);
     }
 
-    /**
-     * Create new role
-     */
-    create(role: Omit<Role, '_id' | 'created_at' | 'updated_at'>): Observable<Role> {
-        return this.http.post<Role>(this.baseUrl, role);
+    // Crear rol: POST /api/roles
+    create(newRole: Role): Observable<Role> {
+        const roleToCreate = {
+            name: newRole.name,
+            description: newRole.description || ''
+        };
+        return this.http.post<Role>(`${environment.url_ms_security}/roles`, roleToCreate);
     }
 
-    /**
-     * Update existing role
-     */
-    update(id: string, role: Partial<Role>): Observable<Role> {
-        return this.http.put<Role>(`${this.baseUrl}/${id}`, role);
+    // Actualizar rol: PUT /api/roles/{id}
+    update(theRole: Role): Observable<Role> {
+        const roleToUpdate = {
+            name: theRole.name,
+            description: theRole.description || ''
+        };
+        return this.http.put<Role>(`${environment.url_ms_security}/roles/${theRole.id}`, roleToUpdate);
     }
 
-    /**
-     * Delete role
-     */
-    delete(id: string): Observable<any> {
-        return this.http.delete(`${this.baseUrl}/${id}`);
+    // Eliminar rol: DELETE /api/roles/{id}
+    delete(id: number): Observable<any> {
+        return this.http.delete(`${environment.url_ms_security}/roles/${id}`);
     }
 }

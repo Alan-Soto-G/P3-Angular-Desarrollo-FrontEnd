@@ -1,49 +1,38 @@
-// Custom styles for roles component
-.roles-page {
-    .card-stats {
-        transition: transform 0.3s ease;
-
-        &:hover {
-            transform: translateY(-2px);
+.permissions-container {
+    .table {
+        margin-bottom: 0;
+        
+        th, td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 8px;
         }
-    }
-
-    .icon-shape {
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        i {
-            font-size: 18px;
+        
+        th:first-child,
+        td:first-child {
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        input[type="checkbox"] {
+            transform: scale(1.2);
+            cursor: pointer;
         }
     }
 }
 
-// Custom badge styles for role status
-.role-badge {
-    &.active {
-        background-color: #2dce89;
-        color: white;
+::ng-deep .permissions-modal {
+    .swal2-popup {
+        padding: 20px;
     }
-
-    &.inactive {
-        background-color: #f5365c;
-        color: white;
+    
+    .swal2-html-container {
+        max-height: 500px;
+        overflow-y: auto;
     }
 }
 
-// Info card styles
-.info-card {
-    .list-group-item {
-        border: none;
-        padding: 0.5rem 0;
-        background-color: transparent;
-
-        &:first-child {
-            border-top: none;
-        }
-    }
+.table-row-hover:hover {
+    background-color: #f8f9fa;
+    cursor: pointer;
 }
