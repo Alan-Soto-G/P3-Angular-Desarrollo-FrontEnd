@@ -16,12 +16,13 @@ export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard', icon: 'ni-tv-2 text-primary', class: '', type: 2 },
   { path: '/login', title: 'Login', icon: 'ni-key-25 text-info', class: '', type: 0 },
   { path: '/register', title: 'Register', icon: 'ni-circle-08 text-pink', class: '', type: 0 },
-  
-  // Rutas protegidas (solo cuando está logueado)
+    // Rutas protegidas (solo cuando está logueado)
   { path: '/user-profile', title: 'Perfil Usuario', icon: 'ni-single-02 text-yellow', class: '', type: 1 },
   { path: '/users', title: 'Usuarios', icon: 'ni-badge text-success', class: '', type: 1 },
   { path: '/roles', title: 'Roles', icon: 'ni-settings-gear-65 text-info', class: '', type: 1 },
-  { path: '/devices', title: 'Dispositivos', icon: 'ni-laptop text-info', class: '', type: 1 },
+  { path: '/devices', title: 'Dispositivos', icon: 'ni-laptop text-info', class: '', type: 1 },  { path: '/digital-signatures', title: 'Firmas Digitales', icon: 'ni-ui-04 text-purple', class: '', type: 1 },
+  { path: '/security-questions', title: 'Preguntas de Seguridad', icon: 'ni-check-bold text-success', class: '', type: 1 },
+  { path: '/answers', title: 'Respuestas', icon: 'ni-chat-round text-info', class: '', type: 1 },
   { path: '/theaters/list', title: 'Teatros', icon: 'ni-building text-orange', class: '', type: 1 },
   { path: '/address', title: 'Direcciones', icon: 'ni-pin-3 text-orange', class: '', type: 1 },
   { path: '/password', title: 'Contraseñas', icon: 'ni-lock-circle-open text-purple', class: '', type: 1 },

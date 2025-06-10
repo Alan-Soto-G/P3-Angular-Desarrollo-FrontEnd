@@ -1,0 +1,27 @@
+.container {
+  max-width: 1200px;
+}
+
+.card-stats {
+  transition: transform 0.2s ease;
+}
+
+.card-stats:hover {
+  transform: translateY(-2px);
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #32325d;
+}
+
+.swal2-input, .swal2-textarea {
+  margin-bottom: 1rem !important;
+}

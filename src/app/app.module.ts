@@ -18,15 +18,9 @@ import { AuthenticatedGuard } from './guardians/authenticated.guard';
 import { NoAuthenticatedGuard } from './guardians/no-authenticated.guard';
 
 import { GoogleMapsModule } from '@angular/google-maps';
-import { AddressComponent } from './pages/address/address.component';
-import { PermissionsComponent } from './pages/permissions/permissions.component';
 import { PermissionService } from './services/permission.service';
-import { SessionsComponent } from './pages/sessions/sessions.component';
-import { RolePermissionsComponent } from './pages/role-permissions/role-permissions.component';
-import { PagesComponent } from './pages/pages.component';
-import { ProfilesComponent } from './pages/profiles/profiles.component'; 
 import { ProfileService } from './services/profile.service';
-import { UsersComponent } from './pages/users/users.component';
+import { PagesComponent } from './pages/pages.component';
 
 @NgModule({
   imports: [
@@ -40,18 +34,11 @@ import { UsersComponent } from './pages/users/users.component';
     NgbModule,
     RouterModule,
     AppRoutingModule
-  ],
-  declarations: [
+  ],  declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    AddressComponent,
-    PermissionsComponent,
-    SessionsComponent,
-    RolePermissionsComponent,
-    PagesComponent,
-    ProfilesComponent,
-    UsersComponent
+    PagesComponent
   ],
   providers: [
     {

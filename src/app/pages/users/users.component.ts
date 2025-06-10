@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 export class UsersComponent implements OnInit {
   // Datos para la tabla
   title = 'Gestión de Usuarios';
-  headers = ['ID', 'Nombre', 'Email', 'Direccion', 'Firma Digital', 'Dispositivos', 'Contraseñas', 'Sesiones', 'Acciones'];
+  headers = ['ID', 'Nombre', 'Email', 'Direccion', 'Firma Digital', 'Dispositivos', 'Contraseñas', 'Sesiones'];
   users: User[] = [];
   displayData: any[] = []; // Datos mapeados para la tabla
   isLoading = false;
