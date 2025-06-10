@@ -1,0 +1,11 @@
+<app-table-crud
+  [title]="'Relaciones Usuario-Rol'"
+  [headers]="headers"
+  [data]="data"
+  [isLoading]="isLoading"
+  [showAddButton]="true"
+  [addButtonText]="'Nueva Relación'"
+  (onAdd)="handleAdd()"
+  (onRowClick)="handleRowClick($event)"
+>
+</app-table-crud>
