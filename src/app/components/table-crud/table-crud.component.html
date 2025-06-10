@@ -48,36 +48,36 @@
               <!-- Cuerpo de la tabla -->
               <tbody>
                 <!-- Fila por cada elemento en data -->
-                <tr *ngFor="let row of data; let i = index" (click)="handleRowClick(row, i)" style="cursor: pointer;">
+                <tr *ngFor="let row of data; let i = index" class="table-row-hover">
                   
                   <!-- Para usuarios: mostrar datos + emojis + botón crear sesión -->
                   <ng-container *ngIf="title === 'Gestión de Usuarios'">
-                    <td class="text-sm">{{ row.id }}</td>
-                    <td class="text-sm">{{ row.name }}</td>
-                    <td class="text-sm">{{ row.email }}</td>
+                    <td class="text-sm" (click)="handleCellClick(row, i, 0, 'ID')" [class]="'column-0'">{{ row.id }}</td>
+                    <td class="text-sm" (click)="handleCellClick(row, i, 1, 'Nombre')" [class]="'column-1'">{{ row.name }}</td>
+                    <td class="text-sm" (click)="handleCellClick(row, i, 2, 'Email')" [class]="'column-2'">{{ row.email }}</td>
                     <!-- Botones con emojis en columnas de íconos -->
-                    <td class="text-center">
+                    <td class="text-center" (click)="handleCellClick(row, i, 3, 'Dirección')" [class]="'column-3'">
                       <button class="btn btn-sm btn-outline-primary" 
                               (click)="$event.stopPropagation()" 
                               title="Direccion">
                         🏠
                       </button>
                     </td>
-                    <td class="text-center">
+                    <td class="text-center" (click)="handleCellClick(row, i, 4, 'Firma')" [class]="'column-4'">
                       <button class="btn btn-sm btn-outline-success" 
                               (click)="$event.stopPropagation()" 
                               title="Firma Digital">
                         ✍️
                       </button>
                     </td>
-                    <td class="text-center">
+                    <td class="text-center" (click)="handleCellClick(row, i, 5, 'Dispositivos')" [class]="'column-5'">
                       <button class="btn btn-sm btn-outline-info" 
                               (click)="$event.stopPropagation()" 
                               title="Dispositivos">
                         📱
                       </button>
                     </td>
-                    <td class="text-center">
+                    <td class="text-center" (click)="handleCellClick(row, i, 6, 'Contraseñas')" [class]="'column-6'">
                       <button class="btn btn-sm btn-outline-warning" 
                               (click)="$event.stopPropagation()" 
                               title="Contraseñas">
@@ -85,23 +85,23 @@
                       </button>
                     </td>
                     <!-- Columna "Sesiones": botón para crear la sesión -->
-                    <td class="text-center">
+                    <td class="text-center" (click)="handleCellClick(row, i, 7, 'Sesiones')" [class]="'column-7'">
                       <button class="btn btn-sm btn-outline-secondary" 
                               (click)="handleCreateSessionClick(row, i); $event.stopPropagation()" 
                               title="Crear sesión">
                         ⏰
                       </button>
                     </td>
-                    <td class="text-sm">{{ row.acciones }}</td>
+                    <td class="text-sm" (click)="handleCellClick(row, i, 8, 'Acciones')" [class]="'column-8'">{{ row.acciones }}</td>
                   </ng-container>
 
                   <!-- Para sesiones: mostrar todos los datos directamente -->
                   <ng-container *ngIf="title === 'Gestión de Sesiones'">
-                    <td class="text-sm">{{ row.id }}</td>
-                    <td class="text-sm">{{ row.token }}</td>
-                    <td class="text-sm">{{ row.expiration }}</td>
-                    <td class="text-sm">{{ row.FACode }}</td>
-                    <td class="text-sm">
+                    <td class="text-sm" (click)="handleCellClick(row, i, 0, 'ID')" [class]="'column-0'">{{ row.id }}</td>
+                    <td class="text-sm" (click)="handleCellClick(row, i, 1, 'Token')" [class]="'column-1'">{{ row.token }}</td>
+                    <td class="text-sm" (click)="handleCellClick(row, i, 2, 'Expiración')" [class]="'column-2'">{{ row.expiration }}</td>
+                    <td class="text-sm" (click)="handleCellClick(row, i, 3, 'Código FA')" [class]="'column-3'">{{ row.FACode }}</td>
+                    <td class="text-sm" (click)="handleCellClick(row, i, 4, 'Estado')" [class]="'column-4'">
                       <span class="badge" 
                             [ngClass]="{
                               'badge-success': row.state === 'active',
@@ -111,16 +111,16 @@
                         {{ row.state }}
                       </span>
                     </td>
-                    <td class="text-sm">{{ row.acciones }}</td>
+                    <td class="text-sm" (click)="handleCellClick(row, i, 5, 'Acciones')" [class]="'column-5'">{{ row.acciones }}</td>
                   </ng-container>
 
                   <!-- Para perfiles: mostrar datos específicos -->
                   <ng-container *ngIf="title === 'Gestión de Perfiles'">
-                    <td class="text-sm">{{ row.id }}</td>
-                    <td class="text-sm">{{ row.usuario }}</td>
-                    <td class="text-sm">{{ row.email }}</td>
-                    <td class="text-sm">{{ row.telefono }}</td>
-                    <td class="text-center">
+                    <td class="text-sm" (click)="handleCellClick(row, i, 0, 'ID')" [class]="'column-0'">{{ row.id }}</td>
+                    <td class="text-sm" (click)="handleCellClick(row, i, 1, 'Usuario')" [class]="'column-1'">{{ row.usuario }}</td>
+                    <td class="text-sm" (click)="handleCellClick(row, i, 2, 'Email')" [class]="'column-2'">{{ row.email }}</td>
+                    <td class="text-sm" (click)="handleCellClick(row, i, 3, 'Teléfono')" [class]="'column-3'">{{ row.telefono }}</td>
+                    <td class="text-center" (click)="handleCellClick(row, i, 4, 'Foto')" [class]="'column-4'">
                       <div *ngIf="row.fotoUrl; else noPhoto" style="width: 50px; height: 50px; overflow: hidden; border-radius: 50%; margin: 0 auto;">
                         <img [src]="row.fotoUrl" 
                              alt="Foto de perfil" 
@@ -130,12 +130,28 @@
                         <span class="text-muted">Sin foto</span>
                       </ng-template>
                     </td>
-                    <td class="text-sm">{{ row.acciones }}</td>
+                    <td class="text-sm" (click)="handleCellClick(row, i, 5, 'Acciones')" [class]="'column-5'">{{ row.acciones }}</td>
+                  </ng-container>
+
+                  <!-- 🆕 PARA ROLES: Detectar columnas específicas -->
+                  <ng-container *ngIf="title === 'Gestión de Roles'">
+                    <td class="text-sm" (click)="handleCellClick(row, i, 0, 'ID')" [class]="'column-0'">{{ getValueForHeader(row, headers[0], 0) }}</td>
+                    <td class="text-sm" (click)="handleCellClick(row, i, 1, 'Nombre')" [class]="'column-1'">{{ getValueForHeader(row, headers[1], 1) }}</td>
+                    <td class="text-sm" (click)="handleCellClick(row, i, 2, 'Descripción')" [class]="'column-2'">{{ getValueForHeader(row, headers[2], 2) }}</td>
+                    <td class="text-sm clickable-cell permissions-cell" (click)="handleCellClick(row, i, 3, 'Permisos')" [class]="'column-3'">
+                      <span class="permissions-button">🔑 {{ getValueForHeader(row, headers[3], 3) }}</span>
+                    </td>
+                    <td class="text-sm clickable-cell actions-cell" (click)="handleCellClick(row, i, 4, 'Acciones')" [class]="'column-4'">
+                      <span class="actions-button">⚙️ {{ getValueForHeader(row, headers[4], 4) }}</span>
+                    </td>
                   </ng-container>
 
                   <!-- Para otras tablas: mostrar datos genéricos -->
-                  <ng-container *ngIf="title !== 'Gestión de Usuarios' && title !== 'Gestión de Sesiones' && title !== 'Gestión de Perfiles'">
-                    <td class="text-sm" *ngFor="let header of headers; let j = index">
+                  <ng-container *ngIf="title !== 'Gestión de Usuarios' && title !== 'Gestión de Sesiones' && title !== 'Gestión de Perfiles' && title !== 'Gestión de Roles'">
+                    <td class="text-sm" 
+                        *ngFor="let header of headers; let j = index"
+                        (click)="handleCellClick(row, i, j, header)"
+                        [class]="'column-' + j">
                       {{ getValueForHeader(row, header, j) }}
                     </td>
                   </ng-container>

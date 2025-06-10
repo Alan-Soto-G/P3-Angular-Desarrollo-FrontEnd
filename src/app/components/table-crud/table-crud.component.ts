@@ -37,11 +37,27 @@ export class TableCrudComponent implements OnInit {
   handleAddClick() {
     this.onAdd.emit();
   }
+// Nuevo método para manejar clic en celda específica
+handleCellClick(row: any, rowIndex: number, columnIndex: number, columnName: string): void {
+    this.onRowClick.emit({ 
+        row, 
+        index: rowIndex,
+        columnIndex: columnIndex,
+        column: columnName,
+        columnName: columnName
+    });
+}
 
-  // Método para manejar click en una fila
-  handleRowClick(row: any, index: number) {
-    this.onRowClick.emit({ row, index });
-  }
+// Mantener el método existente para compatibilidad
+handleRowClick(row: any, rowIndex: number): void {
+    this.onRowClick.emit({ 
+        row, 
+        index: rowIndex,
+        columnIndex: -1,
+        column: 'general',
+        columnName: 'general'
+    });
+}
 
   // Método para manejar click en botones de acción
   handleButtonClick(action: string, row: any, index: number) {
@@ -61,6 +77,8 @@ export class TableCrudComponent implements OnInit {
     console.log('Emoji button clicked:', action, row);
     this.onEmojiClick.emit({ action, row, index });
   }
+
+  
 
   // Método helper para obtener el valor de una propiedad del objeto
   getObjectValues(obj: any): any[] {

@@ -24,7 +24,60 @@
         }
     }
 }
+// Estilos para las columnas clickeables de roles
+.permissions-cell {
+    background-color: #e3f2fd !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    font-weight: bold !important;
+    color: #1976d2 !important;
+    
+    &:hover {
+        background-color: #bbdefb !important;
+        color: #0d47a1 !important;
+    }
+    
+    .permissions-button {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+    }
+}
 
+.actions-cell {
+    background-color: #fff3e0 !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    font-weight: bold !important;
+    color: #f57c00 !important;
+    
+    &:hover {
+        background-color: #ffe0b2 !important;
+        color: #e65100 !important;
+    }
+    
+    .actions-button {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+    }
+}
+
+.clickable-cell {
+    cursor: pointer !important;
+    transition: background-color 0.2s ease;
+}
+
+// Columnas no clickeables
+.column-0, .column-1, .column-2 {
+    cursor: default;
+    
+    &:hover {
+        background-color: #f5f5f5;
+    }
+}
 // Responsive adjustments
 @media (max-width: 768px) {
     .table-crud {
@@ -37,4 +90,5 @@
             font-size: 0.875rem;
         }
     }
+
 }
