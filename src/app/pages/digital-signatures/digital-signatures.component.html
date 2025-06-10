@@ -30,6 +30,6 @@
 <!-- Componente tabla-crud -->
 <div class="container-fluid mt--5">
     <app-table-crud [title]="title" [headers]="headers" [data]="displayData" [isLoading]="isLoading"
-        (rowClick)="onRowClick($event)" (addClick)="onAddSignature()">
+        (onRowClick)="onRowClick($event)" (onAdd)="onAddSignature()">
     </app-table-crud>
 </div>

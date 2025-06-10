@@ -85,3 +85,58 @@
         max-height: 250px;
     }
 }
+
+// Estilos mejorados para el modal de firma digital
+.swal2-popup {
+    .signature-modal-image {
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    .text-primary {
+        color: #5e72e4 !important;
+    }
+
+    .text-info {
+        color: #11cdef !important;
+    }
+
+    .badge-secondary {
+        background-color: #8898aa !important;
+    }
+
+    // Mejorar el espaciado en el modal
+    .container-fluid {
+        padding: 0 15px;
+    }
+
+    .row {
+        margin: 0 -15px;
+    }
+
+    .col-md-7, .col-md-5 {
+        padding: 0 15px;
+    }
+
+    // Iconos con mejor espaciado
+    i.fas {
+        width: 16px;
+        text-align: center;
+    }
+
+    // Texto muted más sutil
+    .text-muted {
+        color: #8898aa !important;
+        font-size: 0.875rem;
+    }
+
+    // Línea divisoria más elegante
+    hr {
+        border-top: 1px solid #dee2e6;
+        margin: 1rem 0;
+    }
+}

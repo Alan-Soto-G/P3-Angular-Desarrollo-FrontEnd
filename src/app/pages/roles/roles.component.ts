@@ -55,7 +55,7 @@ loadRoles(): void {
                 id: role.id,
                 nombre: role.name,
                 descripcion: role.description || 'Sin descripción',
-                permisos: 'Permisos', // 👈 Hacer más obvio
+                permisos: 'Permisos',
                 acciones: 'Opciones',
                 _originalRole: role
             }));

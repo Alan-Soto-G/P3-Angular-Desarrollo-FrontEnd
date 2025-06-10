@@ -123,8 +123,7 @@ export class DigitalSignaturesComponent implements OnInit {
     } catch (error) {
       return 'Fecha inválida';
     }
-  }
-  // Manejar click en fila de la tabla
+  }  // Manejar click en fila de la tabla
   onRowClick(event: any) {
     const displayedRow = event.row;
     const originalSignature = displayedRow._originalSignature;
@@ -135,34 +134,44 @@ export class DigitalSignaturesComponent implements OnInit {
 
     // Obtener URL de la imagen
     const photoUrl = this.digitalSignatureService.getPhotoUrl(originalSignature.photo || '');
+    const userName = user?.name || 'Usuario Desconocido';
 
     Swal.fire({
-      title: `${user?.name || 'Usuario'} - Firma`,
+      title: `Firma Digital - ${userName}`,
       html: `
-        <div class="row">
-          <div class="col-md-6">
-            <div class="text-center">
-              <h6 class="mb-3">Firma Digital</h6>
-              ${photoUrl ? `
-                <img src="${photoUrl}" 
-                     alt="Firma Digital" 
-                     class="signature-modal-image img-fluid" 
-                     style="max-width: 100%; max-height: 250px; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-              ` : '<p class="text-muted">No hay imagen disponible</p>'}
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-7">
+              <div class="text-center mb-3">
+                ${photoUrl ? `
+                  <img src="${photoUrl}" 
+                       alt="Firma Digital de ${userName}" 
+                       class="signature-modal-image img-fluid" 
+                       style="max-width: 100%; max-height: 300px; border: 2px solid #dee2e6; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">
+                ` : `
+                  <div class="text-muted p-4" style="border: 2px dashed #dee2e6; border-radius: 12px; background-color: #f8f9fa;">
+                    <i class="fas fa-image fa-3x mb-3"></i>
+                    <p>No hay imagen disponible</p>
+                  </div>
+                `}
+              </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="text-left">
-              <h6 class="mb-3">Información del Usuario</h6>
-              <p><strong>Nombre:</strong><br>${user?.name || 'N/A'}</p>
-              <p><strong>Email:</strong><br>${user?.email || 'N/A'}</p>
-              <hr>
-              <p><strong>ID Firma:</strong> ${originalSignature.id}</p>
-              <p><strong>Creado:</strong><br>${this.formatDate(originalSignature.created_at)}</p>
-              <p><strong>Actualizado:</strong><br>${this.formatDate(originalSignature.updated_at)}</p>
-            </div>
-          </div>
-        </div>
+            <div class="col-md-5">
+              <div class="text-left pl-3">
+                <div class="mb-4">
+                  <h6 class="text-primary mb-2"><i class="fas fa-user mr-2"></i>Información del Usuario</h6>
+                  <div class="mb-3">
+                    <strong>Nombre:</strong><br>
+                    <span class="text-dark">${user?.name || 'N/A'}</span>
+                  </div>
+                  <div class="mb-3">
+                    <strong>Email:</strong><br>
+                    <span class="text-dark">${user?.email || 'N/A'}</span>
+                  </div>
+                </div>
+                
+                <hr class="my-3">
+
       `,
       showCancelButton: true,
       showDenyButton: true,
@@ -172,7 +181,7 @@ export class DigitalSignaturesComponent implements OnInit {
       confirmButtonColor: '#28a745',
       denyButtonColor: '#dc3545',
       cancelButtonColor: '#6c757d',
-      width: '700px',
+      width: '800px',
       customClass: {
         popup: 'text-left'
       }

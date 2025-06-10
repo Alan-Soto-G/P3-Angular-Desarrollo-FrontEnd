@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {
     this.user = { email: "", password: "" };
   }
+
   ngOnInit() {
     console.log('🔧 Login component inicializado');
     console.log('🔧 Google configurado:', this.isGoogleConfigured);
@@ -40,13 +41,15 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.initializeGoogleSignIn();
       }, 1000);
     } else {
-      console.log('⚠️ Google no está configurado, usando modo demo');
+      console.log('⚠️ Google no está configurado');
     }
   }
 
   ngOnDestroy() {
     // Cleanup si es necesario
-  }  private initializeGoogleSignIn() {
+  }
+
+  private initializeGoogleSignIn() {
     console.log('🔧 Inicializando Google Sign In...');
     console.log('🔧 Google object disponible:', typeof google !== 'undefined');
     
@@ -190,7 +193,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         Swal.fire("Autenticación Inválida", "Usuario o contraseña inválido", "error");
       }
     });
-  }  // Login con Google - Versión inteligente que detecta configuración
+  }
+
+  // Login con Google - Solo funcionalidad real
   signInWithGoogle(): void {
     console.log('🔧 Click en Google login');
     console.log('🔧 Google configurado:', this.isGoogleConfigured);
@@ -203,9 +208,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         google.accounts.id.prompt((notification: any) => {
           console.log('🔧 Google prompt notification:', notification);
           if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-            console.log('⚠️ Google prompt no se mostró, intentando con ventana popup');
-            // Si el prompt no se muestra, intentar con popup manual
-            this.signInWithGooglePopup();
+            console.log('⚠️ Google prompt no se mostró');
+            Swal.fire({
+              title: 'Google Sign-In',
+              text: 'No se pudo mostrar el popup de Google. Por favor, intente nuevamente.',
+              icon: 'warning'
+            });
           }
         });
       } catch (error) {
@@ -213,17 +221,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.showGoogleError('Error al mostrar Google login: ' + error);
       }
     } else {
-      console.log('⚠️ Fallback a modo demo');
-      // Usar modo demo si no está configurado
-      this.signInWithGoogleDemo();
+      Swal.fire({
+        title: 'Google Sign-In no disponible',
+        text: 'Google Sign-In no está configurado correctamente. Contacte al administrador.',
+        icon: 'error'
+      });
     }
-  }
-
-  // Método alternativo con popup manual
-  private signInWithGooglePopup(): void {
-    console.log('🔧 Intentando popup manual de Google');
-    // Este método podría implementarse si el prompt automático falla
-    this.signInWithGoogleDemo(); // Por ahora usar demo como fallback
   }
 
   // Método para mostrar errores de Google
@@ -232,97 +235,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     Swal.fire({
       title: 'Error de Google Login',
       text: message,
-      icon: 'error',
-      confirmButtonText: 'Usar Demo',
-      showCancelButton: true,
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.signInWithGoogleDemo();
-      }
-    });
-  }
-  // Método demo como fallback
-  private signInWithGoogleDemo(): void {
-    Swal.fire({
-      title: 'Demo: Login con Google',
-      html: `
-        <p><strong>Google no está configurado.</strong></p>
-        <p>Para usar Google real, configura tu Client ID en:</p>
-        <code>src/app/config/google.config.ts</code>
-        <br><br>
-        <strong>¿Deseas continuar con el usuario demo?</strong>
-      `,
-      icon: 'info',
-      showCancelButton: true,
-      confirmButtonText: 'Sí, continuar con demo',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const demoGoogleUser = {
-          user: {
-            id: 'google_demo_123',
-            name: 'Usuario Demo Google',
-            email: 'demo.google@example.com',
-            picture: 'https://ui-avatars.com/api/?name=Usuario+Demo+Google&size=180&background=4285f4&color=fff&bold=true'
-          },
-          token: 'demo_google_token_' + new Date().getTime()
-        };
-        
-        this.securityService.saveSession(demoGoogleUser);
-        
-        Swal.fire({
-          icon: 'success',
-          title: '¡Bienvenido!',
-          text: `Hola ${demoGoogleUser.user.name}`,
-          timer: 2000,
-          showConfirmButton: false
-        }).then(() => {
-          this.router.navigate(["/dashboard"]);
-        });
-      }
-    });
-  }
-  // GitHub placeholder - Demo mode
-  signInWithGitHub(): void {
-    Swal.fire({
-      title: 'Demo: Login con GitHub',
-      html: `
-        <p>Este es un modo demo del login con GitHub.</p>
-        <p>En producción se conectaría con la API real de GitHub.</p>
-        <br>
-        <strong>¿Deseas continuar con el usuario demo?</strong>
-      `,
-      icon: 'info',
-      showCancelButton: true,
-      confirmButtonText: 'Sí, continuar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // Simular datos de usuario de GitHub
-        const demoGitHubUser = {
-          user: {
-            id: 'github_demo_456',
-            name: 'Usuario Demo GitHub',
-            email: 'demo.github@example.com',
-            picture: 'https://ui-avatars.com/api/?name=Usuario+Demo+GitHub&size=180&background=333&color=fff&bold=true'
-          },
-          token: 'demo_github_token_' + new Date().getTime()
-        };
-        
-        console.log('Demo GitHub login:', demoGitHubUser);
-        this.securityService.saveSession(demoGitHubUser);
-        
-        Swal.fire({
-          icon: 'success',
-          title: '¡Bienvenido!',
-          text: `Hola ${demoGitHubUser.user.name}`,
-          timer: 2000,
-          showConfirmButton: false
-        }).then(() => {
-          this.router.navigate(["dashboard"]);
-        });
-      }
+      icon: 'error'
     });
   }
 }
